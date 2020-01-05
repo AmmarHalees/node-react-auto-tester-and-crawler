@@ -25,19 +25,20 @@ async function getLogin() {
 
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
- 
+
   await page.goto('https://stg.erabia.io/erabiastore/?site=yerabiab2c-ae');
   await page.screenshot({path: 'Files/Login/yerabia.png'});
+  await page.waitFor(1000);
+
+  await page.click('body > main > header > nav.navigation.navigation--top.padd-wide > div > div > div.nav__left.js-site-logo.text-left > button');
   await page.waitFor(1000); 
-  await page.click('body > main > header > nav.navigation.navigation--middle.js-navigation--middle.padd-wide > div > div.row.desktop__nav > div.nav__left.col-xs-12.col-sm-9.col-lg-10 > div > div.col-sm-2.hidden-xs.visible-sm.mobile-menu > button');
+  await page.click('body > main > header > nav.navigation.navigation--bottom.js_navigation--bottom.js-enquire-offcanvas-navigation.light > ul > li > a');
   await page.waitFor(1000); 
-  await page.click('body > main > header > nav.navigation.navigation--bottom.js_navigation--bottom.js-enquire-offcanvas-navigation.dark > ul > li > a');
-  await page.waitFor(1000); 
+
   await page.type('.login-left-content-component #j_username', 'zakib@erabia.com');
   await page.type('.login-left-content-component #j_password', 'de4***feef516he6DD3$SA2');
   await page.click('.login-left-content-component #loginForm > button');
 
-  
 }
 
 
@@ -52,7 +53,7 @@ console.log(user)
 
     fname:'Ammar',
     lname:'Halees',
-    email: user === undefined ||user==="" || user ===null?`${Math.random().toString(36).substring(7)}@gmail.com` : user,
+    // email: user === undefined ||user==="" || user ===null?`${Math.random().toString(36).substring(7)}@gmail.com` : user,
     password: 'de4***feef516he6DD3$SA2',
     number:'0798949000',
   
@@ -61,10 +62,15 @@ console.log(user)
   await page.goto('https://stg.erabia.io/erabiastore/?site=yerabiab2c-ae');
   await page.screenshot({path: 'Files/Register/yerabia.png'});
   await page.waitFor(1000); 
-  await page.click('body > main > header > nav.navigation.navigation--middle.js-navigation--middle.padd-wide > div > div.row.desktop__nav > div.nav__left.col-xs-12.col-sm-9.col-lg-10 > div > div.col-sm-2.hidden-xs.visible-sm.mobile-menu > button');
+
+
+  await page.click('body > main > header > nav.navigation.navigation--top.padd-wide > div > div > div.nav__left.js-site-logo.text-left > button');
   await page.waitFor(1000); 
-  await page.click('body > main > header > nav.navigation.navigation--bottom.js_navigation--bottom.js-enquire-offcanvas-navigation.dark > ul > li > a');
+  await page.click('body > main > header > nav.navigation.navigation--bottom.js_navigation--bottom.js-enquire-offcanvas-navigation.light > ul > li > a');
   await page.waitFor(1000); 
+  
+  
+
   page.hover(".user-register__headline")
   await page.screenshot({path: 'Files/Register/register.png'});
 
@@ -90,7 +96,6 @@ console.log(user)
   await  page.keyboard.press('ArrowDown');
   await   page.keyboard.press('Enter');
 
-
   await page.click('#registerForm > div:nth-child(7) > div > div > div.btn-group.bootstrap-select.day.form-control > button')
   await  page.keyboard.press('ArrowDown');
   await   page.keyboard.press('Enter');
@@ -102,7 +107,14 @@ console.log(user)
 
 
   await page.click('#registerForm > div:nth-child(7) > div > div > div.btn-group.bootstrap-select.year.form-control > button')
-  await  page.keyboard.press('ArrowDown');
+
+  for(let i =0; i<19 ; i++){
+
+
+    await  page.keyboard.press('ArrowDown');
+
+  }
+
   await   page.keyboard.press('Enter');
 
   await page.click('#registerForm > div:nth-child(8) > div > div > div > div > button')
@@ -119,8 +131,7 @@ console.log(user)
   await  page.keyboard.press('ArrowDown');
   await   page.keyboard.press('Enter');
 
-
-  await page.type('#email',userCred.email);
+  await page.type('#email',user);
   await page.type('#password', userCred.password);
   await page.type('#checkPwd', userCred.password);
   
@@ -141,6 +152,9 @@ console.log(user)
 
 
   await page.waitFor(3000); 
+
+  page.hover(".carousel__component--headline")
+  
   await page.screenshot({path: 'Files/Register/registerSuccessorFailure.png'});
 
 

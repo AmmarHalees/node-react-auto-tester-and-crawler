@@ -35,7 +35,7 @@ class App extends React.Component {
 event.preventDefault();
     this.setState({
 
-      regEmail:event.target.value
+      regEmail:event.target.value === undefined ||event.target.value==="" || event.target.value ===null?`${Math.random().toString(36).substring(7)}@gmail.com` : event.target.value
 
     },()=>console.log(this.state.regEmail))
 
